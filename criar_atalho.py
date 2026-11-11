@@ -5,7 +5,7 @@ Uso:
   python criar_atalho.py --aqui       # so na pasta do projeto
   python criar_atalho.py --remover    # apaga os atalhos criados por este script
 """
-import argparse, os, subprocess, sys
+import argparse, ctypes, os, subprocess, sys
 
 PASTA = os.path.dirname(os.path.abspath(__file__))
 NOME = "VYRA.lnk"
@@ -15,9 +15,15 @@ def destinos(aqui):
     if aqui:
         return [PASTA]
     menu = os.path.join(os.environ.get("APPDATA", ""), r"Microsoft\Windows\Start Menu\Programs")
-    area = subprocess.run(["powershell", "-NoProfile", "-Command", "[Environment]::GetFolderPath('Desktop')"],
-                          capture_output=True, text=True).stdout.strip()
-    return [p for p in (area, menu) if p and os.path.isdir(p)]
+    return [p for p in (area_de_trabalho(), menu) if p and os.path.isdir(p)]
+
+
+def area_de_trabalho():
+    """Pasta da Area de Trabalho direto do Windows (funciona com OneDrive e nomes acentuados)."""
+    buf = ctypes.create_unicode_buffer(260)
+    if ctypes.windll.shell32.SHGetFolderPathW(None, 0x10, None, 0, buf) == 0:     # CSIDL_DESKTOPDIRECTORY
+        return buf.value
+    return os.path.join(os.path.expanduser("~"), "Desktop")
 
 
 def criar(pasta):
