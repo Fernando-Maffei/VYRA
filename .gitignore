@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Configuracoes pessoais de cada usuario (criadas ao usar o programa)
+luz_estudio.json
+luz_estudio.json.tmp
+luz_config.json
+
+# Atalhos criados por criar_atalho.py (apontam para caminhos desta maquina)
+*.lnk
+
+# Sistema
+Thumbs.db
+desktop.ini
+.DS_Store
