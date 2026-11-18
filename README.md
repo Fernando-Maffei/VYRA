@@ -27,7 +27,7 @@ cerca de **20 MB de memória** e **1 a 3% de um núcleo** com um efeito animado 
 - **Grupos e ajustes individuais** — um efeito para tudo e outro só para uma fan, por exemplo.
 - **Perfis** — Gaming, Trabalho, Filme ou os seus, trocados com um clique.
 - **Continua aceso com a janela fechada** — um processo leve e sem janela mantém os efeitos.
-- **Sem instalar bibliotecas** — só Python e o OpenRGB.
+- **Sem instalar bibliotecas** — só Python e o OpenRGB (fitas Bluetooth pedem também a `bleak`).
 
 ## Como instalar
 
@@ -81,6 +81,7 @@ Além disso, tem controle próprio para:
 | Aparelho | Como |
 |---|---|
 | **AULA F75 Pro sem fio** (receptor 2.4G `3554:FA09`) | Controle próprio, funciona até com o OpenRGB fechado |
+| **Fitas de LED Bluetooth do app LotusLamp X** (`ELK-BLEDOM`, `ELK-BLEDDM`, `ELK-BLEDOB`, `MELK`…) | Controle próprio pelo Bluetooth do PC. Precisa de `pip install bleak` e do app LotusLamp X fechado no celular (a fita aceita uma conexão por vez). A fita inteira fica de uma cor só |
 
 Testado com: Corsair Vengeance RGB Pro, Nollie 8CH, Gigabyte B550M AORUS ELITE,
 Logitech G703 Lightspeed (com fio e sem fio) e AULA F75 Pro (com fio e sem fio).
@@ -129,6 +130,7 @@ luz_servico.pyw     processo sem janela que mantém os efeitos com o VYRA fechad
 luz.py              protocolo de rede do OpenRGB (e uma linha de comando simples)
 rgb/                núcleo: dispositivos, efeitos, mesa, captura de tela, motor, perfis
   aula.py           controle próprio do teclado AULA sem fio
+  lotus.py          controle próprio das fitas Bluetooth do LotusLamp X
 ui/                 aparência: tema, ícones e componentes da interface
 criar_atalho.py     cria o atalho com o ícone
 ferramentas/        OpenRGB simulado, para testar sem hardware

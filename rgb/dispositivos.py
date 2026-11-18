@@ -228,7 +228,7 @@ class Gerenciador:
 
 
 def gerenciador_padrao(host="127.0.0.1", porta=6742):
-    """OpenRGB mais os controladores proprios que puderem ser carregados neste PC.
+    """OpenRGB mais os controladores proprios (AULA 2.4G, fitas LotusLamp X) que puderem ser carregados neste PC.
 
     LUZ_SEM_EXTRAS=1 desliga os extras (usado nos testes, para nao tocar no hardware real).
     """
@@ -238,6 +238,12 @@ def gerenciador_padrao(host="127.0.0.1", porta=6742):
             from . import aula, hid
             if hid.disponivel():
                 extras.append(aula.BackendAULA().iniciar())
+        except (ImportError, OSError):
+            pass
+        try:
+            from . import lotus
+            if lotus.disponivel():
+                extras.append(lotus.BackendLotus().iniciar())
         except (ImportError, OSError):
             pass
     return Gerenciador(BackendOpenRGB(host, porta), extras)
